@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rentals</title>
+  <style>
+    ul {
+      margin: 5mm;
+      padding: 0;
+    }
+    ul li {
+      display: inline;
+      margin: 5mm;
+    }
+  </style>
+</head>
+<body>
+
+<ul>
+  <li><a href="{% url 'rentals:reservation_list' %}">Reservation list</a></li>
+  <li><a href="{% url 'rentals:reservation_create' %}">Add reservation</a></li>
+  <li><a href="{% url 'rentals:rental_create' %}">Add rental</a></li>
+</ul>
+
+{% block content %}{% endblock %}
+
+</body>
+</html>

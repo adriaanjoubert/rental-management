@@ -1,33 +1,33 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Rentals</title>
-</head>
-<body>
+{% extends 'rentals/base.html' %}
 
-<table>
-  <thead>
-    <tr>
-      <td>Rental_name</td>
-      <td>ID</td>
-      <td>Checkin</td>
-      <td>Checkout</td>
-      <td>Previous reservation, ID</td>
-    </tr>
-  </thead>
-  <tbody>
-    {% for reservation in reservations %}
-      <tr>
-        <td>{{ reservation.rental.name }}</td>
-        <td>Res-{{ reservation.id }}</td>
-        <td>{{ reservation.checkin }}</td>
-        <td>{{ reservation.checkout }}</td>
-        <td>{% if reservation.previous_reservation_id %}Res-{{ reservation.previous_reservation_id }}{% else %}-{% endif %}</td>
-      </tr>
-    {% endfor %}
-  </tbody>
+{% block content %}
 
-</table>
+  {% if reservations %}
+    <table>
+      <thead>
+        <tr>
+          <td>Rental_name</td>
+          <td>ID</td>
+          <td>Checkin</td>
+          <td>Checkout</td>
+          <td>Previous reservation, ID</td>
+        </tr>
+      </thead>
+      <tbody>
+        {% for reservation in reservations %}
+          <tr>
+            <td>{{ reservation.rental.name }}</td>
+            <td>Res-{{ reservation.id }}</td>
+            <td>{{ reservation.checkin }}</td>
+            <td>{{ reservation.checkout }}</td>
+            <td>{% if reservation.previous_reservation_id %}Res-{{ reservation.previous_reservation_id }}{% else %}-{% endif %}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
 
-</body>
-</html>
+    </table>
+  {% else %}
+    <p>There are no reservations. <a href="{% url 'rentals:reservation_create' %}">Add</a> one now.</p>
+  {% endif %}
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'rentals/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    {% if rentals_count %}
+
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit">
+        </form>
+
+    {% else %}
+
+        <p>
+            On this page you will be able to add reservations to your rentals. You currently have 0 rentals.
+            <a href="{% url 'rentals:rental_create' %}">Add</a> one now.
+        </p>
+
+    {% endif %}
+
+{% endblock %}

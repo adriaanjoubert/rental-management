@@ -1,0 +1,40 @@
+{% extends 'rentals/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <h1>Add a rental</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit">
+    </form>
+
+    <h1>Your rentals</h1>
+
+    {% if rentals %}
+        <table>
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Name</td>
+                    <td>Created at</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rental in rentals %}
+                    <tr>
+                        <td>{{ rental.id }}</td>
+                        <td>{{ rental.name }}</td>
+                        <td>{{ rental.created_at }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>You do not currently have any rentals.</p>
+    {% endif %}
+
+{% endblock %}
